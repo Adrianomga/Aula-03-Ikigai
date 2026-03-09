@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste de Ikigai</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+background:#f4f6f9;
+margin:0;
+padding:30px;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.08);
+}
+
+h1{
+text-align:center;
+color:#1f4e79;
+}
+
+.pergunta{
+margin-top:25px;
+padding:15px;
+border:1px solid #e1e1e1;
+border-radius:8px;
+background:#fafafa;
+}
+
+label{
+display:block;
+margin:8px 0;
+cursor:pointer;
+}
+
+button{
+margin-top:25px;
+padding:12px 20px;
+font-size:16px;
+border:none;
+background:#1f4e79;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#173a5c;
+}
+
+.resultado{
+margin-top:30px;
+padding:20px;
+background:#eef7ee;
+border:1px solid #cfe6cf;
+border-radius:8px;
+display:none;
+}
+
+ul{
+padding-left:20px;
+}
+
+.info{
+margin-top:30px;
+padding:15px;
+background:#f8f9fb;
+border-left:5px solid #1f4e79;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Teste de Ikigai</h1>
+
+<p>Responda às perguntas e descubra como suas respostas se relacionam com paixão, profissão, missão ou vocação.</p>
+
+<div class="pergunta">
+<h3>1. O que eu amo fazer?</h3>
+
+<label><input type="radio" name="q1" value="A"> Criar ideias ou projetos</label>
+<label><input type="radio" name="q1" value="B"> Ensinar ou ajudar pessoas</label>
+<label><input type="radio" name="q1" value="C"> Estudar, pesquisar ou analisar</label>
+<label><input type="radio" name="q1" value="D"> Organizar ou resolver problemas</label>
+
+</div>
+
+<div class="pergunta">
+<h3>2. O que faço bem-feito?</h3>
+
+<label><input type="radio" name="q2" value="A"> Criar soluções novas</label>
+<label><input type="radio" name="q2" value="B"> Comunicar ou orientar pessoas</label>
+<label><input type="radio" name="q2" value="C"> Pesquisar ou analisar informações</label>
+<label><input type="radio" name="q2" value="D"> Organizar e executar tarefas</label>
+
+</div>
+
+<div class="pergunta">
+<h3>3. O que o mundo precisa?</h3>
+
+<label><input type="radio" name="q3" value="A"> Inovação e criatividade</label>
+<label><input type="radio" name="q3" value="B"> Educação e orientação</label>
+<label><input type="radio" name="q3" value="C"> Conhecimento confiável</label>
+<label><input type="radio" name="q3" value="D"> Eficiência e organização</label>
+
+</div>
+
+<div class="pergunta">
+<h3>4. Pelo que posso ser pago para fazer?</h3>
+
+<label><input type="radio" name="q4" value="A"> Criar negócios ou projetos</label>
+<label><input type="radio" name="q4" value="B"> Ensinar ou treinar pessoas</label>
+<label><input type="radio" name="q4" value="C"> Pesquisar ou planejar</label>
+<label><input type="radio" name="q4" value="D"> Gerenciar ou executar processos</label>
+
+</div>
+
+<button onclick="mostrarResultado()">Ver resultado</button>
+
+<div id="resultado" class="resultado"></div>
+
+<div class="info">
+
+<strong>Critério de interpretação:</strong>
+
+<ul>
+<li>1 e 2 iguais → Paixão</li>
+<li>2 e 4 iguais → Profissão</li>
+<li>1 e 3 iguais → Missão</li>
+<li>3 e 4 iguais → Vocação</li>
+<li>1, 2, 3 e 4 iguais → Aproximação do Ikigai</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+
+function mostrarResultado(){
+
+const r1=document.querySelector('input[name="q1"]:checked')?.value
+const r2=document.querySelector('input[name="q2"]:checked')?.value
+const r3=document.querySelector('input[name="q3"]:checked')?.value
+const r4=document.querySelector('input[name="q4"]:checked')?.value
+
+const div=document.getElementById("resultado")
+
+if(!r1 || !r2 || !r3 || !r4){
+div.style.display="block"
+div.innerHTML="Por favor responda todas as perguntas."
+return
+}
+
+let resultados=[]
+
+if(r1===r2){
+resultados.push("Paixão: você ama fazer isso e também faz bem.")
+}
+
+if(r2===r4){
+resultados.push("Profissão: você possui habilidade nisso e pode ser remunerado.")
+}
+
+if(r1===r3){
+resultados.push("Missão: existe alinhamento entre o que você gosta e o que o mundo precisa.")
+}
+
+if(r3===r4){
+resultados.push("Vocação: o que o mundo precisa também pode gerar remuneração.")
+}
+
+if(r1===r2 && r2===r3 && r3===r4){
+resultados.push("Ikigai: forte convergência entre paixão, talento, propósito e remuneração.")
+}
+
+if(resultados.length===0){
+resultados.push("Suas respostas não apresentaram combinações diretas. Isso indica que seu Ikigai ainda pode estar em construção.")
+}
+
+div.style.display="block"
+
+div.innerHTML="<h2>Resultado</h2><ul>"+resultados.map(r=>"<li>"+r+"</li>").join("")+"</ul>"
+
+}
+
+</script>
+
+</body>
+</html>
